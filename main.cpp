@@ -1,3 +1,4 @@
+#include <sstream>
 #include "mtcnn.h"
 
 #define landmark_n 68
@@ -140,13 +141,16 @@ void testVideo(const string videoname){
 	float factor = 0.709f;
 	float threshold[3] = { 0.7f, 0.6f, 0.6f };
 	int minSize = 40;
-   // int count = 0;
-	double t = (double)cv::getTickCount();
+    int count = 0;
+	double t;
 	while(true){
+        t = (double)cv::getTickCount();
         cap >> image;
         if(image.empty())
             break;
+        t = (double)cv::getTickCount();
 		vector<FaceInfo> faceInfo = detector.Detect(image, minSize, threshold, factor, 3);
+        std::cout <<"frame: " << count << ", time:" << (double)(cv::getTickCount() - t) / cv::getTickFrequency() << "s"<<std::endl;
 		for (int i = 0; i < faceInfo.size(); i++){
 			int x = (int)faceInfo[i].bbox.xmin;
 			int y = (int)faceInfo[i].bbox.ymin;
@@ -160,10 +164,13 @@ void testVideo(const string videoname){
 				cv::circle(image, cv::Point((int)landmark[2 * j], (int)landmark[2 * j + 1]), 2, cv::Scalar(255, 255, 0), 2);
 			}
 		}
-		cv::imshow("image", image);
-		cv::waitKey(1);
+		//cv::imshow("image", image);
+		//cv::waitKey(1);
+        //std::ostringstream buffer;
+        //buffer << "snapshot/" << count << ".jpg";
+        //imwrite(buffer.str(), image);
+        count++;
 	}
-  // std::cout <<" time," << (double)(cv::getTickCount() - t) / cv::getTickFrequency() << "s"<<std::endl;
 	
 }
 

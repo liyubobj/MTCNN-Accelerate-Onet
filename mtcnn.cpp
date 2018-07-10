@@ -157,10 +157,10 @@ MTCNN::MTCNN(const string& proto_model_dir) {
 	PNet_->CopyTrainedLayersFrom(proto_model_dir + "/det1.caffemodel");
 	RNet_.reset(new Net<float>((proto_model_dir + "/det2.prototxt"), TEST));
 	RNet_->CopyTrainedLayersFrom(proto_model_dir + "/det2.caffemodel");
-	ONet_.reset(new Net<float>((proto_model_dir + "/det3.prototxt"), TEST));
-	ONet_->CopyTrainedLayersFrom(proto_model_dir + "/det3.caffemodel");
-	//ONet_.reset(new Net<float>((proto_model_dir + "/det3-half.prototxt"), TEST));
-	//ONet_->CopyTrainedLayersFrom(proto_model_dir + "/det3-half.caffemodel");
+	//ONet_.reset(new Net<float>((proto_model_dir + "/det3.prototxt"), TEST));
+	//ONet_->CopyTrainedLayersFrom(proto_model_dir + "/det3.caffemodel");
+	ONet_.reset(new Net<float>((proto_model_dir + "/det3-half.prototxt"), TEST));
+	ONet_->CopyTrainedLayersFrom(proto_model_dir + "/det3-half.caffemodel");
 	
 	Blob<float>* input_layer;
 	input_layer = PNet_->input_blobs()[0];
