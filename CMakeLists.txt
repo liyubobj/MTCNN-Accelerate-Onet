@@ -8,11 +8,11 @@ add_compile_options(-m64)
 
 include_directories(
     /usr/local/cuda/include
-    /opt/caffe/build/include
-    /opt/caffe/include)
+    /opt/py-faster-rcnn/caffe-fast-rcnn/build/src/
+    /opt/py-faster-rcnn/caffe-fast-rcnn/include)
 link_directories(
     /usr/local/cuda/lib64
-    /opt/caffe/build/lib)
+    /opt//py-faster-rcnn/caffe-fast-rcnn/build/lib)
 
 set(SOURCE_FILES main.cpp mtcnn.cpp mtcnn.h)
 add_executable(MTCNN_Accelerate-Onet ${SOURCE_FILES})
